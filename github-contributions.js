@@ -19,7 +19,7 @@ contributor = function(user) {
       user: 'eighttrackmind'
     }, function(err, res) {
       if (err) {
-        return deferred.reject(new Error(err));
+        return deferred.reject(err);
       } else {
         return process(res, total, page);
       }
@@ -39,9 +39,5 @@ contributor = function(user) {
   fetch(1, 0);
   return deferred.promise;
 };
-
-contributor('eighttrackmind').then(function(count) {
-  return console.log(count);
-});
 
 module.exports = contributor;

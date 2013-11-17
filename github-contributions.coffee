@@ -18,7 +18,7 @@ contributor = (user) ->
 			user: 'eighttrackmind'
 		, (err, res) ->
 			if err
-				deferred.reject new Error err
+				deferred.reject err
 			else
 				process res, total, page
 
@@ -40,8 +40,5 @@ contributor = (user) ->
 
 	# return
 	deferred.promise
-
-contributor('eighttrackmind').then (count) ->
-	console.log count
 
 module.exports = contributor
