@@ -33,6 +33,7 @@
     "url": "https://github.com/eighttrackmind/github-contributions/issues"
   },
   "dependencies": {
-    "github": "~0.1.12"
+    "github": "~0.1.12",
+    "when": "~2.6.0"
   }
 }

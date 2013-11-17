@@ -1,31 +1,47 @@
 api = require 'github'
+promise = require 'when'
 
+# initialize github helper
 github = new api
 	version: '3.0.0'
 
-fetch = (page, total) ->
+contributor = (user) ->
 
-	github.repos.getFromUser
-		page: page
-		per_page: 100
-		user: 'eighttrackmind'
-	, (err, res) ->
-		process res, total, page
+	deferred = promise.defer()
 
-process = (res, total, page) ->
+	# fetches repo count
+	fetch = (page, total) ->
 
-	count = res.length
+		github.repos.getFromUser
+			page: page
+			per_page: 100
+			user: 'eighttrackmind'
+		, (err, res) ->
+			if err
+				deferred.reject new Error err
+			else
+				process res, total, page
 
-	if count
-		total += count
-		fetch ++page, total
+	# tallies the total count, and fetches the next page of results if necessary
+	process = (res, total, page) ->
 
-	else
-		notify total
+		count = res.length
 
-notify = (total) ->
+		if count
+			total += count
+			deferred.notify total
+			fetch ++page, total
 
-	console.log total
+		else
+			deferred.resolve total
 
-# do it!
-fetch 1, 0
+	# do it!
+	fetch 1, 0
+
+	# return
+	deferred.promise
+
+contributor('eighttrackmind').then (count) ->
+	console.log count
+
+module.exports = contributor
