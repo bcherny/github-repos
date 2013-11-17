@@ -16,7 +16,7 @@ contributor = function(user) {
     return github.repos.getFromUser({
       page: page,
       per_page: 100,
-      user: 'eighttrackmind'
+      user: user
     }, function(err, res) {
       if (err) {
         return deferred.reject(err);

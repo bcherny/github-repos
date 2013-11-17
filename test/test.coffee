@@ -2,32 +2,49 @@ get = require '../github-contributions'
 
 exports.github =
 
-	success: (done) ->
+	success: (test) ->
 
-		test.expect called.success, 1
-		test.expect called.progress, 1
+		test.expect 1
 
-		called =
-			success: 0
-			progress: 0
+		fn = (count) ->
+			test.equals count, 1
+			test.done()
 
-		success = (count) ->
+		err = ->
+			test.ok false
+			test.done()
 
-			++called.success
-			done()
+		# username has 1 repo
+		get('demo').then fn, err
 
-		progress = (countSoFar) ->
-			++called.progress
+	error: (test) ->
 
-		get('demo').then success, (->), progress
+		test.expect 1
 
-	error: (done) ->
+		fn = ->
+			test.ok true
+			test.done()
+
+		# username doesn't exist and should throw an error
+		get('ajkldanjkndjklfndjfnjkdsnfjrnfjkdndjkvnifsdvnfjkvnsrifrifnsermnerjifnerjfnjr').then (->), fn, (->)
+
+	progress: (test) ->
+
+		test.expect 1
 
 		called = 0
 
-		err = (err) ->
+		fn = ->
 			++called
-			test.expect called, 1
-			done()
 
-		get('ajkldanjkndjklfndjfnjkdsnfjrnfjkdndjkvnifsdvnfjkvnsrifrifnsermnerjifnerjfnjr').then (->), err, (->)
+		done = (total) ->
+			expected = Math.ceil total/100
+			test.equals called, expected
+			test.done()
+
+		err = ->
+			test.ok false
+			test.done()
+
+		# has >300 repos
+		get('isaacs').then done, err, fn

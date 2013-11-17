@@ -4,31 +4,45 @@ var get;
 get = require('../github-contributions');
 
 exports.github = {
-  success: function(done) {
-    var called, progress, success;
-    test.expect(called.success, 1);
-    test.expect(called.progress, 1);
-    called = {
-      success: 0,
-      progress: 0
+  success: function(test) {
+    var err, fn;
+    test.expect(1);
+    fn = function(count) {
+      test.equals(count, 1);
+      return test.done();
     };
-    success = function(count) {
-      ++called.success;
-      return done();
+    err = function() {
+      test.ok(false);
+      return test.done();
     };
-    progress = function(countSoFar) {
-      return ++called.progress;
-    };
-    return get('demo').then(success, (function() {}), progress);
+    return get('demo').then(fn, err);
   },
-  error: function(done) {
-    var called, err;
-    called = 0;
-    err = function(err) {
-      ++called;
-      test.expect(called, 1);
-      return done();
+  error: function(test) {
+    var fn;
+    test.expect(1);
+    fn = function() {
+      test.ok(true);
+      return test.done();
     };
-    return get('ajkldanjkndjklfndjfnjkdsnfjrnfjkdndjkvnifsdvnfjkvnsrifrifnsermnerjifnerjfnjr').then((function() {}), err, (function() {}));
+    return get('ajkldanjkndjklfndjfnjkdsnfjrnfjkdndjkvnifsdvnfjkvnsrifrifnsermnerjifnerjfnjr').then((function() {}), fn, (function() {}));
+  },
+  progress: function(test) {
+    var called, done, err, fn;
+    test.expect(1);
+    called = 0;
+    fn = function() {
+      return ++called;
+    };
+    done = function(total) {
+      var expected;
+      expected = Math.ceil(total / 100);
+      test.equals(called, expected);
+      return test.done();
+    };
+    err = function() {
+      test.ok(false);
+      return test.done();
+    };
+    return get('isaacs').then(done, err, fn);
   }
 };

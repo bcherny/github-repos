@@ -15,7 +15,7 @@ contributor = (user) ->
 		github.repos.getFromUser
 			page: page
 			per_page: 100
-			user: 'eighttrackmind'
+			user: user
 		, (err, res) ->
 			if err
 				deferred.reject err
