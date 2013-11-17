@@ -31,5 +31,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/eighttrackmind/github-contributions/issues"
+  },
+  "dependencies": {
+    "github": "~0.1.12"
   }
 }
