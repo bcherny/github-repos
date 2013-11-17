@@ -1,0 +1,35 @@
+{
+  "name": "github-contributions",
+  "version": "0.0.0",
+  "description": "Fetch a user's contribution count from github",
+  "main": "github-contributions.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eighttrackmind/github-contributions.git"
+  },
+  "keywords": [
+    "github",
+    "git",
+    "user",
+    "contribute",
+    "contribution",
+    "repo",
+    "repository",
+    "number",
+    "tally",
+    "module",
+    "author",
+    "social"
+  ],
+  "author": "Boris Cherny <boris@performancejs.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eighttrackmind/github-contributions/issues"
+  }
+}
