@@ -6,14 +6,14 @@ get = require('../github-contributions');
 exports.github = {
   success: function(done) {
     var called, progress, success;
+    test.expect(called.success, 1);
+    test.expect(called.progress, 1);
     called = {
       success: 0,
       progress: 0
     };
     success = function(count) {
       ++called.success;
-      test.expect(called.success, 1);
-      test.expect(called.progress, 1);
       return done();
     };
     progress = function(countSoFar) {

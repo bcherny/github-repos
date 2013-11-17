@@ -4,6 +4,9 @@ exports.github =
 
 	success: (done) ->
 
+		test.expect called.success, 1
+		test.expect called.progress, 1
+
 		called =
 			success: 0
 			progress: 0
@@ -11,9 +14,6 @@ exports.github =
 		success = (count) ->
 
 			++called.success
-
-			test.expect called.success, 1
-			test.expect called.progress, 1
 			done()
 
 		progress = (countSoFar) ->
