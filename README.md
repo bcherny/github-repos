@@ -2,7 +2,7 @@ github-contributions
 ====================
 
 [![Build Status](https://travis-ci.org/eighttrackmind/github-contributions.png)](https://travis-ci.org/eighttrackmind/github-contributions.png)
-Fetch a user's contribution count from Github
+Fetch a user's repository count from Github
 
 ## Usage
 

@@ -1,7 +1,7 @@
 {
   "name": "github-contributions",
-  "version": "0.0.1",
-  "description": "Fetch a user's contribution count from Github",
+  "version": "0.0.2",
+  "description": "Fetch a user's repository count from Github",
   "main": "github-contributions.js",
   "directories": {
     "test": "test"
