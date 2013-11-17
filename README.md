@@ -14,6 +14,7 @@ error = (err) -> ...
 progress = (countSoFar) -> ...
 
 getContributions 'someUserName', success, error, progress
+```
 
 ## Features
 
