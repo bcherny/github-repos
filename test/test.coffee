@@ -1,4 +1,4 @@
-get = require '../github-contributions'
+get = require '../github-repos'
 
 exports.github =
 

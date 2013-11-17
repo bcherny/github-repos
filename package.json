@@ -1,8 +1,8 @@
 {
-  "name": "github-contributions",
+  "name": "github-repos",
   "version": "0.0.2",
   "description": "Fetch a user's repository count from Github",
-  "main": "github-contributions.js",
+  "main": "github-repos.js",
   "directories": {
     "test": "test"
   },
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:eighttrackmind/github-contributions.git"
+    "url": "git@github.com:eighttrackmind/github-repos.git"
   },
   "keywords": [
     "github",
@@ -30,7 +30,7 @@
   "author": "Boris Cherny <boris@performancejs.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eighttrackmind/github-contributions/issues"
+    "url": "https://github.com/eighttrackmind/github-repos/issues"
   },
   "dependencies": {
     "github": "~0.1.12",
