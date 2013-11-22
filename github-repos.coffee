@@ -1,4 +1,3 @@
-api = require 'github'
 promise = require 'when'
 request = require 'request'
 
