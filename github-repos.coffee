@@ -1,6 +1,10 @@
 promise = require 'when'
 request = require 'request'
 
+statuses =
+	403: 'API request rate limit exceeded'
+	404: 'You are not authorized to view this resource, or this resource does not exist'
+
 github = (user, clientId, clientSecret) ->
 
 	deferred = do promise.defer
@@ -23,13 +27,28 @@ github = (user, clientId, clientSecret) ->
 		# send the request
 		request data, (err, body, res) ->
 
-			res = JSON.parse res
+			status = body.statusCode
 
-			if err or 'message' of res
-				deferred.reject err or res
+			# success
+			if body.statusCode is 200
 
+				res = JSON.parse res
+
+				if err or 'message' of res
+					deferred.reject err or res
+
+				else
+					process res, total, page
+
+			# error
 			else
-				process res, total, page
+
+				if status of statuses
+					deferred.reject
+						status: status
+						message: statuses[status]
+				else
+					deferred.reject status
 
 	# tallies the total count, and fetches the next page of results if necessary
 	process = (res, total, page) ->
