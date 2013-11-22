@@ -1,24 +1,34 @@
 api = require 'github'
 promise = require 'when'
+request = require 'request'
 
-# initialize github helper
-github = new api
-	version: '3.0.0'
+github = (user, clientId, clientSecret) ->
 
-contributor = (user) ->
-
-	deferred = promise.defer()
+	deferred = do promise.defer
 
 	# fetches repo count
-	fetch = (page, total) ->
+	fetch = (page = 1, total = 0) ->
 
-		github.repos.getFromUser
-			page: page
-			per_page: 100
-			user: user
-		, (err, res) ->
-			if err
-				deferred.reject err
+		# build the request
+		data =
+			url: "https://api.github.com/users/#{user}/repos"
+			qs:
+				page: page
+				per_page: 100
+
+		# authenticate using oauth?
+		if clientId and clientSecret
+			data.qs.client_id = clientId
+			data.qs.client_secret = clientSecret
+
+		# send the request
+		request data, (err, body, res) ->
+
+			res = JSON.parse res
+
+			if err or 'message' of res
+				deferred.reject err or res
+
 			else
 				process res, total, page
 
@@ -36,9 +46,9 @@ contributor = (user) ->
 			deferred.resolve total
 
 	# do it!
-	fetch 1, 0
+	do fetch
 
 	# return
 	deferred.promise
 
-module.exports = contributor
+module.exports = github
