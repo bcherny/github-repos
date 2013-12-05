@@ -10,7 +10,7 @@ statuses = {
   404: 'You are not authorized to view this resource, or this resource does not exist'
 };
 
-github = function(user, clientId, clientSecret) {
+github = function(user, clientId, clientSecret, clientUser) {
   var deferred, fetch, process;
   deferred = promise.defer();
   fetch = function(page, total) {
@@ -22,6 +22,9 @@ github = function(user, clientId, clientSecret) {
       total = 0;
     }
     data = {
+      headers: {
+        'User-Agent': clientUser || user
+      },
       url: "https://api.github.com/users/" + user + "/repos",
       qs: {
         page: page,
@@ -55,8 +58,6 @@ github = function(user, clientId, clientSecret) {
     });
   };
   process = function(res, total, page) {
-    var count;
-    count = res.length;
     if (count) {
       total += count;
       deferred.notify(total);

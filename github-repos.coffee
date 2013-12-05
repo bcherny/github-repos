@@ -5,7 +5,7 @@ statuses =
 	403: 'API request rate limit exceeded'
 	404: 'You are not authorized to view this resource, or this resource does not exist'
 
-github = (user, clientId, clientSecret) ->
+github = (user, clientId, clientSecret, clientUser) ->
 
 	deferred = do promise.defer
 
@@ -14,6 +14,8 @@ github = (user, clientId, clientSecret) ->
 
 		# build the request
 		data =
+			headers:
+				'User-Agent': clientUser or user
 			url: "https://api.github.com/users/#{user}/repos"
 			qs:
 				page: page
@@ -52,8 +54,6 @@ github = (user, clientId, clientSecret) ->
 
 	# tallies the total count, and fetches the next page of results if necessary
 	process = (res, total, page) ->
-
-		count = res.length
 
 		if count
 			total += count
