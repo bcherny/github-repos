@@ -40,7 +40,7 @@ github = (user, clientId, clientSecret, clientUser) ->
 					deferred.reject err or res
 
 				else
-					process res, total, page
+					process res.length, total, page
 
 			# error
 			else
@@ -53,7 +53,7 @@ github = (user, clientId, clientSecret, clientUser) ->
 					deferred.reject status
 
 	# tallies the total count, and fetches the next page of results if necessary
-	process = (res, total, page) ->
+	process = (count, total, page) ->
 
 		if count
 			total += count
@@ -70,3 +70,8 @@ github = (user, clientId, clientSecret, clientUser) ->
 	deferred.promise
 
 module.exports = github
+
+(github 'eighttrackmind').then (res) ->
+	console.log 'res', res
+, (err) ->
+	console.error err

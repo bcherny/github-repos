@@ -19,7 +19,7 @@ progress = (countSoFar) -> ...
 ## Usage (with oauth)
 
 ```coffee
-(get 'someUserName', 'myClientId', 'myClientSecret').then success, error, progress
+(get 'someUserName', 'myClientId', 'myClientSecret', 'requestingUserName').then success, error, progress
 ```
 
 ## Features

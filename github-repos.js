@@ -43,7 +43,7 @@ github = function(user, clientId, clientSecret, clientUser) {
         if (err || 'message' in res) {
           return deferred.reject(err || res);
         } else {
-          return process(res, total, page);
+          return process(res.length, total, page);
         }
       } else {
         if (status in statuses) {
@@ -57,7 +57,7 @@ github = function(user, clientId, clientSecret, clientUser) {
       }
     });
   };
-  process = function(res, total, page) {
+  process = function(count, total, page) {
     if (count) {
       total += count;
       deferred.notify(total);
@@ -71,3 +71,9 @@ github = function(user, clientId, clientSecret, clientUser) {
 };
 
 module.exports = github;
+
+(github('eighttrackmind')).then(function(res) {
+  return console.log('res', res);
+}, function(err) {
+  return console.error(err);
+});
