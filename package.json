@@ -1,6 +1,6 @@
 {
   "name": "github-repos",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Fetch a user's repository count from Github",
   "main": "github-repos.js",
   "directories": {
