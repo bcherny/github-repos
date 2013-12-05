@@ -71,9 +71,3 @@ github = function(user, clientId, clientSecret, clientUser) {
 };
 
 module.exports = github;
-
-(github('eighttrackmind')).then(function(res) {
-  return console.log('res', res);
-}, function(err) {
-  return console.error(err);
-});

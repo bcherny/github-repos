@@ -70,8 +70,3 @@ github = (user, clientId, clientSecret, clientUser) ->
 	deferred.promise
 
 module.exports = github
-
-(github 'eighttrackmind').then (res) ->
-	console.log 'res', res
-, (err) ->
-	console.error err
